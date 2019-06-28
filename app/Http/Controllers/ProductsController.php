@@ -15,8 +15,11 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::all();
+        $links = [
+          "/products/create" => "Create",
+        ];
 
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'links'));
     }
 
     /**
@@ -32,19 +35,18 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $product = new Product();
+        $attributes = request()->validate([
+            'name' => ['required', 'min:3', 'max:255'],
+            'proteins' => ['required', 'min:3', 'max:100'],
+            'fats' => ['required', 'min:3', 'max:100'],
+            'carbs' => ['required', 'min:3', 'max:100'],
+        ]);
 
-        $product->name = request()->name;
-        $product->proteins = request()->proteins;
-        $product->fats = request()->fats;
-        $product->carbs = request()->carbs;
-
-        $product->save();
+        Product::create($attributes);
 
         return redirect('/products');
     }
@@ -57,7 +59,14 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        $links = [
+            "/products" => "All products",
+            "/products/create" => "Create",
+            "/products/$product->id" => "Edit",
+            "/products/$product->id" => "Delete",
+        ];
+
+        return view('products.show', compact('product', 'links'));
     }
 
     /**
@@ -74,13 +83,21 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Product $product)
     {
-        $product->update(request(['name', 'proteins', 'fats', 'carbs']));
+
+        $attributes = request()->validate([
+            'name' => ['required', 'min:3', 'max:255'],
+            'proteins' => ['required', 'min:3', 'max:100'],
+            'fats' => ['required', 'min:3', 'max:100'],
+            'carbs' => ['required', 'min:3', 'max:100'],
+        ]);
+
+        $product->update($attributes);
+//        $product->update(request(['name', 'proteins', 'fats', 'carbs']));
 
         return redirect('/products');
     }
@@ -95,6 +112,6 @@ class ProductsController extends Controller
     {
         $product->delete();
 
-        return redirect('/$products');
+        return redirect('/products');
     }
 }
