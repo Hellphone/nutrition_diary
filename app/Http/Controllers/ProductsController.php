@@ -40,10 +40,10 @@ class ProductsController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'name' => ['required', 'min:3', 'max:255'],
-            'proteins' => ['required', 'min:3', 'max:100'],
-            'fats' => ['required', 'min:3', 'max:100'],
-            'carbs' => ['required', 'min:3', 'max:100'],
+            'name' => ['required', 'max:255'],
+            'proteins' => ['required', 'lte:100'],
+            'fats' => ['required', 'lte:100'],
+            'carbs' => ['required', 'lte:100'],
         ]);
 
         Product::create($attributes);
