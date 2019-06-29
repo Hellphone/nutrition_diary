@@ -51,4 +51,7 @@
         </div>
 
     </form>
+
+    <a href="/products">Назад</a>
+
 @endsection

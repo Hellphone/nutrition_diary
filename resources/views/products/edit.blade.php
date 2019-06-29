@@ -14,7 +14,7 @@
         @csrf
 
         <div class="field">
-            <label for="title" class="label">Title</label>
+            <label for="name" class="label">Название</label>
 
             <div class="control">
                 <input type="text" name="name" placeholder="Name" value="{{ $product->name }}">
@@ -22,26 +22,26 @@
         </div>
 
         <div class="field">
-            <label for="title" class="label">Белки</label>
+            <label for="proteins" class="label">Белки</label>
 
             <div class="control">
-                <input type="text" name="proteins" placeholder="Name" value="{{ $product->proteins }}">
+                <input type="text" name="proteins" placeholder="Proteins" value="{{ $product->proteins }}">
             </div>
         </div>
 
         <div class="field">
-            <label for="title" class="label">Жиры</label>
+            <label for="fats" class="label">Жиры</label>
 
             <div class="control">
-                <input type="text" name="fats" placeholder="Name" value="{{ $product->fats }}">
+                <input type="text" name="fats" placeholder="Fats" value="{{ $product->fats }}">
             </div>
         </div>
 
         <div class="field">
-            <label for="title" class="label">Углеводы</label>
+            <label for="carbs" class="label">Углеводы</label>
 
             <div class="control">
-                <input type="text" name="carbs" placeholder="Name" value="{{ $product->carbs }}">
+                <input type="text" name="carbs" placeholder="Carbs" value="{{ $product->carbs }}">
             </div>
         </div>
 

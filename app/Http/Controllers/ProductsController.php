@@ -88,16 +88,14 @@ class ProductsController extends Controller
      */
     public function update(Product $product)
     {
-
         $attributes = request()->validate([
             'name' => ['required', 'min:3', 'max:255'],
-            'proteins' => ['required', 'min:3', 'max:100'],
-            'fats' => ['required', 'min:3', 'max:100'],
-            'carbs' => ['required', 'min:3', 'max:100'],
+            'proteins' => ['required', 'lte:100'],
+            'fats' => ['required', 'lte:100'],
+            'carbs' => ['required', 'lte:100'],
         ]);
 
         $product->update($attributes);
-//        $product->update(request(['name', 'proteins', 'fats', 'carbs']));
 
         return redirect('/products');
     }
