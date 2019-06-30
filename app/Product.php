@@ -12,4 +12,9 @@ class Product extends Model
         'fats',
         'carbs'
     ];
+
+    public function records()
+    {
+        return $this->hasMany(Record::class);
+    }
 }
