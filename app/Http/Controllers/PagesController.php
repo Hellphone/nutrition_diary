@@ -9,9 +9,9 @@ class PagesController extends Controller
 {
     public function home()
     {
-        $today = date('Y-m-d');
-        $records = Record::where('date', 'like', $today)->get();
+        $date = date('Y-m-d');
+        $records = Record::where('date', 'like', $date)->get();
 
-        return view('welcome', compact('records', 'today'));
+        return view('welcome', compact('records', 'date'));
     }
 }

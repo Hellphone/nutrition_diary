@@ -17,7 +17,6 @@ class RecordsController extends Controller
     {
         $today = date('Y-m-d');
         $records = Record::where('date', 'like', $today)->get();
-//        TODO: form a Records array with name, weight and calculated calories fields
 
         return view('welcome', compact('products', 'records', 'today'));
     }
@@ -109,5 +108,10 @@ class RecordsController extends Controller
         $record->delete();
 
         return redirect('/');
+    }
+
+    public function calculateKcal(Record $record)
+    {
+        return $record->calculateKcal();
     }
 }

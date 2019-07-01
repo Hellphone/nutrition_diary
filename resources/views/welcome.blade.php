@@ -81,16 +81,15 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Nutrition Diary
                 </div>
 
-                <p>Today is {{ $today }}</p>
+                <p>Today is {{ $date }}</p>
 
                 @if($records->count())
                 <div class="links">
-                    <?php //dd($records); ?>
                     @foreach($records as $record)
-                        <a href="/records/{{ $record->id }}/edit">{{ $record->product->name }} : {{ $record->weight }}</a>
+                        <a href="/records/{{ $record->id }}/edit">{{ $record->product->name }} : {{ $record->weight }} г || {{ $record->calculateKcal() }} кКал</a>
                     @endforeach
                 </div>
                 @else
