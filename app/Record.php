@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Record extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'product_id',
         'weight',
@@ -18,7 +21,10 @@ class Record extends Model
     const FAT_KCAL = 9;
     const CARB_KCAL = 4;
 
-    public function calculateKcal()
+    /**
+     * @return int
+     */
+    public function calculateKcal() : int
     {
         try {
             $relation = self::BASIC_WEIGHT / $this->weight;
@@ -32,6 +38,9 @@ class Record extends Model
         return $Kcal;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function product()
     {
         return $this->belongsTo(Product::class);

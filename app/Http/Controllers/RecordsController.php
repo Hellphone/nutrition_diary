@@ -6,12 +6,14 @@ use App\Product;
 use App\Record;
 use Illuminate\Http\Request;
 
+/**
+ * Class RecordsController
+ * @package App\Http\Controllers
+ */
 class RecordsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -22,19 +24,17 @@ class RecordsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        return view('records.create');
+        $products = Product::all();
+
+        return view('records.create', compact('products'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store()
     {
@@ -50,10 +50,8 @@ class RecordsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Record $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Record $record)
     {
@@ -68,22 +66,19 @@ class RecordsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Record $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Record $record)
     {
-        $record = Record::find($id);
+        $products = Product::all();
 
-        return view('records.edit', compact('record'));
+        return view('records.edit', compact('record', 'products'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Record $record
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Record $record)
     {
@@ -99,9 +94,9 @@ class RecordsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Record $record
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function destroy(Record $record)
     {
@@ -110,7 +105,11 @@ class RecordsController extends Controller
         return redirect('/');
     }
 
-    public function calculateKcal(Record $record)
+    /**
+     * @param Record $record
+     * @return float|int
+     */
+    public function calculateKcal(Record $record) : int
     {
         return $record->calculateKcal();
     }

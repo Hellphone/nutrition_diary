@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'name',
         'proteins',
@@ -13,6 +16,9 @@ class Product extends Model
         'carbs'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function records()
     {
         return $this->hasMany(Record::class);
