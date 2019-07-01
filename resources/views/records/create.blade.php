@@ -16,7 +16,11 @@
             <label for="product_id" class="label">Продукт</label>
 
             <div class="control">
-                <input type="text" name="product_id" placeholder="Product" value="{{ old('product_id') }}">
+                <select name="product_id">
+                    @foreach ($products as $product)
+                        <option value="{{ $product->id }}" @if ($product->id == old('product_id')) selected @endif >{{ $product->name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
 
@@ -32,7 +36,7 @@
             <label for="date" class="label">Дата</label>
 
             <div class="control">
-                <input type="text" name="date" placeholder="Date" value="{{ old('date') }}">
+                <input type="date" name="date" placeholder="Date" value="{{ old('date') ?? date('Y-m-d') }}">
             </div>
         </div>
 
