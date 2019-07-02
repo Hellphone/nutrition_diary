@@ -52,6 +52,8 @@
 
     </form>
 
+    @include('errors')
+
     <a href="/products">Назад</a>
 
 @endsection

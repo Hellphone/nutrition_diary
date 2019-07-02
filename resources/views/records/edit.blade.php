@@ -49,6 +49,8 @@
 
     </form>
 
+    @include('errors')
+
     <form method="POST" action="/records/{{ $record->id }}">
         @method('DELETE')
         @csrf

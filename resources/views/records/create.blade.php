@@ -48,6 +48,8 @@
 
     </form>
 
+    @include('errors')
+
     <a href="/">Назад</a>
 
 @endsection
