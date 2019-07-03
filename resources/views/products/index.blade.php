@@ -17,7 +17,7 @@
         </div>
     @endif
     @if($products->count())
-        <ul>
+        <ul class="table-like">
         @foreach($products as $product)
             <li>
                 <a href="/products/{{ $product->id }}">{{ $product->name }}</a>:
@@ -25,7 +25,7 @@
                 {{ $product->fats }}|
                 {{ $product->carbs }}|
                 <a href="/products/{{ $product->id }}/edit">Edit</a>
-                <form method="POST" action="/products/{{ $product->id }}">
+                <form class="form__update" method="POST" action="/products/{{ $product->id }}">
                     @method('DELETE')
                     @csrf
                     <button type="submit">Delete</button>

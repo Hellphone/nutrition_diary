@@ -1,0 +1,18 @@
+.links-vertical a {
+    display: block;
+    margin-top: 10px;
+}
+
+.form__update {
+    display: inline-block;
+}
+
+ul>li>a {
+    color: #636b6f;
+    text-decoration: none;
+}
+
+ul>li>a:hover {
+    color: #636b6f;
+    text-decoration: underline;
+}

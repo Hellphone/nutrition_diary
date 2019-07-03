@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
         <style>
             html, body {
                 background-color: #fff;
@@ -84,10 +85,14 @@
                     Nutrition Diary
                 </div>
 
+                <div class="links">
+                    <a href="/products">Products</a>
+                </div>
+
                 <p>Today is {{ $date }}</p>
 
                 @if($records->count())
-                <div class="links">
+                <div class="links links-vertical">
                     @foreach($records as $record)
                         <a href="/records/{{ $record->id }}/edit">{{ $record->product->name }} : {{ $record->weight }} г || {{ $record->calculateKcal() }} кКал</a>
                     @endforeach
