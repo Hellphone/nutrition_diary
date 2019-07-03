@@ -38,6 +38,21 @@ class Record extends Model
         return $Kcal;
     }
 
+    public static function calculateKcalForADay($date) : int
+    {
+        try {
+            $records = Record::where('date', 'like', $date)->get();
+            $sum = 0;
+            foreach ($records as $record) {
+                $sum += $record->calculateKcal();
+            }
+        } catch (\Exception $e) {
+            return 0;
+        }
+
+        return $sum;
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

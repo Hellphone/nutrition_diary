@@ -18,7 +18,8 @@ class PagesController extends Controller
     {
         $date = date('Y-m-d');
         $records = Record::where('date', 'like', $date)->get();
+        $todaysKcal = Record::calculateKcalForADay($date);
 
-        return view('welcome', compact('records', 'date'));
+        return view('welcome', compact('records', 'date', 'todaysKcal'));
     }
 }

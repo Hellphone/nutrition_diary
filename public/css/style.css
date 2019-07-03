@@ -16,3 +16,8 @@ ul>li>a:hover {
     color: #636b6f;
     text-decoration: underline;
 }
+
+.important {
+    font-weight: bold;
+    text-decoration: underline;
+}

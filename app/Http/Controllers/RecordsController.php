@@ -17,10 +17,11 @@ class RecordsController extends Controller
      */
     public function index()
     {
-        $today = date('Y-m-d');
-        $records = Record::where('date', 'like', $today)->get();
+        $date = date('Y-m-d');
+        $records = Record::where('date', 'like', $date)->get();
+        $todaysKcal = Record::calculateKcalForADay($date);
 
-        return view('welcome', compact('products', 'records', 'today'));
+        return view('welcome', compact('products', 'records', 'date', 'todaysKcal'));
     }
 
     /**

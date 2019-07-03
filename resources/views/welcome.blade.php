@@ -90,6 +90,7 @@
                 </div>
 
                 <p>Today is {{ $date }}</p>
+                <p>Total today's Kcal: <span class="important">{{ $todaysKcal }}</span></p>
 
                 @if($records->count())
                 <div class="links links-vertical">

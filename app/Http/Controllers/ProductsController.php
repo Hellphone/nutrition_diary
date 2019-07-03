@@ -14,6 +14,7 @@ class ProductsController extends Controller
     {
         $products = Product::all();
         $links = [
+          "/" => "Home",
           "/products/create" => "Create",
         ];
 
