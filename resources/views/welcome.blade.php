@@ -89,7 +89,11 @@
                     <a href="/products">Products</a>
                 </div>
 
-                <p>Today is {{ $date }}</p>
+                <p><a href="/{{ $yesterday }}"><- </a>Today is {{ $date }}
+                    @if($tomorrow)
+                        <a href="/{{ $tomorrow }}"> -></a>
+                    @endif
+                </p>
                 <p>Total today's Kcal: <span class="important">{{ $todaysKcal }}</span></p>
 
                 @if($records->count())
