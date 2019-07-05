@@ -39,11 +39,7 @@ class RecordsController extends Controller
      */
     public function store()
     {
-        $attributes = request()->validate([
-            'product_id' => ['required'],
-            'weight' => ['required', 'min:1'],
-            'date' => ['required', 'date_format:Y-m-d']
-        ]);
+        $attributes = $this->validateRecord();
 
         Record::create($attributes);
 
@@ -83,11 +79,7 @@ class RecordsController extends Controller
      */
     public function update(Record $record)
     {
-        $attributes = request()->validate([
-            'product_id' => ['required'],
-            'weight' => ['required', 'min:1'],
-            'date' => ['required', 'date_format:Y-m-d']
-        ]);
+        $attributes = $this->validateRecord();
 
         $record->update($attributes);
 
@@ -104,6 +96,15 @@ class RecordsController extends Controller
         $record->delete();
 
         return redirect('/');
+    }
+
+    public function validateRecord()
+    {
+        return request()->validate([
+            'product_id' => ['required'],
+            'weight' => ['required', 'min:1'],
+            'date' => ['required', 'date_format:Y-m-d']
+        ]);
     }
 
     /**

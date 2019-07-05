@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 
+/**
+ * Class ProductsController
+ * @package App\Http\Controllers
+ */
 class ProductsController extends Controller
 {
     /**
@@ -34,12 +38,7 @@ class ProductsController extends Controller
      */
     public function store()
     {
-        $attributes = request()->validate([
-            'name' => ['required', 'max:255'],
-            'proteins' => ['required', 'lte:100'],
-            'fats' => ['required', 'lte:100'],
-            'carbs' => ['required', 'lte:100'],
-        ]);
+        $attributes = $this->validateProduct();
 
         Product::create($attributes);
 
@@ -77,12 +76,7 @@ class ProductsController extends Controller
      */
     public function update(Product $product)
     {
-        $attributes = request()->validate([
-            'name' => ['required', 'min:3', 'max:255'],
-            'proteins' => ['required', 'lte:100'],
-            'fats' => ['required', 'lte:100'],
-            'carbs' => ['required', 'lte:100'],
-        ]);
+        $attributes = $this->validateProduct();
 
         $product->update($attributes);
 
@@ -99,5 +93,18 @@ class ProductsController extends Controller
         $product->delete();
 
         return redirect('/products');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function validateProduct()
+    {
+        return request()->validate([
+            'name' => ['required', 'max:255'],
+            'proteins' => ['required', 'lte:100'],
+            'fats' => ['required', 'lte:100'],
+            'carbs' => ['required', 'lte:100'],
+        ]);
     }
 }
