@@ -12,27 +12,81 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     /**
+     * @param null $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function home($date = null)
     {
-        if ($date == null) {
-            $date = date('Y-m-d');
-            $yesterday = date('Y-m-d', time() - 60 * 60 * 24);
-            $tomorrow = null;
-        } else {
-            
-        }
-        $records = Record::where('date', 'like', $date)->get();
-        $todaysKcal = Record::calculateKcalForADay($date);
+        $dates = $this->getDates($date);
+
+        $records = Record::where('date', 'like', $dates['today'])->get();
+        $todaysKcal = Record::calculateKcalForADay($dates['today']);
 
         return view('welcome', compact(
             'products',
             'records',
-            'date',
-            'yesterday',
-            'tomorrow',
+            'dates',
             'todaysKcal'
         ));
+    }
+
+    /**
+     * @param $date
+     * @return array
+     */
+    public function getDates($date)
+    {
+        $today = $this->getToday($date);
+        $yesterday = $this->getYesterday($today);
+        $tomorrow = $this->getTomorrow($today);
+
+        $dates = compact('yesterday', 'today', 'tomorrow');
+
+        return $dates;
+    }
+
+    /**
+     * @param $date
+     * @return false|string
+     */
+    public function getToday($date)
+    {
+        if ($date == null) {
+            return date('Y-m-d');
+        } else {
+            return $date;
+        }
+    }
+
+    /**
+     * @param $date
+     * @return false|string
+     */
+    public function getYesterday($date)
+    {
+        if ($date == null) {
+            $date = date('Y-m-d');
+        }
+
+        $unixTime = strtotime($date);
+        $yesterday = date('Y-m-d', $unixTime - 60 * 60 * 24);
+
+        return $yesterday;
+    }
+
+    /**
+     * @param $date
+     * @return false|string|null
+     */
+    public function getTomorrow($date)
+    {
+        if ($date == date('Y-m-d')) {
+            $tomorrow = null;
+        } else {
+            $unixTime = strtotime($date);
+            $tomorrow = date('Y-m-d', $unixTime + 60 * 60 * 24);
+        }
+
+        return $tomorrow;
     }
 }

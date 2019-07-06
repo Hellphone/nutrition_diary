@@ -89,9 +89,9 @@
                     <a href="/products">Products</a>
                 </div>
 
-                <p><a href="/{{ $yesterday }}"><- </a>Today is {{ $date }}
-                    @if($tomorrow)
-                        <a href="/{{ $tomorrow }}"> -></a>
+                <p><a href="/{{ $dates['yesterday'] }}"><- </a>Today is {{ $dates['today'] }}
+                    @if($dates['tomorrow'])
+                        <a href="/{{ $dates['tomorrow'] }}"> -></a>
                     @endif
                 </p>
                 <p>Total today's Kcal: <span class="important">{{ $todaysKcal }}</span></p>

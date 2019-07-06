@@ -15,11 +15,11 @@ class Record extends Model
         'date',
     ];
 
-    const BASIC_WEIGHT = 100;
+    private const BASIC_WEIGHT = 100;
 
-    const PROTEIN_KCAL = 4;
-    const FAT_KCAL = 9;
-    const CARB_KCAL = 4;
+    private const PROTEIN_KCAL = 4;
+    private const FAT_KCAL = 9;
+    private const CARB_KCAL = 4;
 
     /**
      * @return int
