@@ -5,7 +5,7 @@
 @endsection
 
 @section('h1')
-    Product #{{ $record->id }} Edit
+    Record #{{ $record->id }} Edit
 @endsection
 
 @section('content')
