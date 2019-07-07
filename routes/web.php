@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', 'PagesController@home');
-Route::get('/{date}', 'PagesController@home');
-
+Route::get('/', 'PagesController@index');
+Route::get('/{date}', 'PagesController@index');
 
 Route::resource('products', 'ProductsController');
 Route::resource('records', 'RecordsController');

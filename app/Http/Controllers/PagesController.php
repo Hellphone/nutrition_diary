@@ -15,7 +15,7 @@ class PagesController extends Controller
      * @param null $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function home($date = null)
+    public function index($date = null)
     {
         $dates = $this->getDates($date);
 

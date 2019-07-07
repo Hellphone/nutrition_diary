@@ -105,7 +105,7 @@
                 @else
                     <p>No records for today</p>
                 @endif
-                <a href="/records/create">+</a>
+                <a href="/records/create/?date={{ $dates['today'] }}">+</a>
             </div>
         </div>
     </body>

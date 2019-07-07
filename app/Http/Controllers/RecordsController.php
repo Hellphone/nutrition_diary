@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Record;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 /**
  * Class RecordsController
@@ -13,15 +14,22 @@ use Illuminate\Http\Request;
 class RecordsController extends Controller
 {
     /**
+     * @param null $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index($date = null)
     {
-        $date = date('Y-m-d');
-        $records = Record::where('date', 'like', $date)->get();
-        $todaysKcal = Record::calculateKcalForADay($date);
+        $dates = $this->getDates($date);
 
-        return view('welcome', compact('products', 'records', 'date', 'todaysKcal'));
+        $records = Record::where('date', 'like', $dates['today'])->get();
+        $todaysKcal = Record::calculateKcalForADay($dates['today']);
+
+        return view('welcome', compact(
+            'products',
+            'records',
+            'dates',
+            'todaysKcal'
+        ));
     }
 
     /**
@@ -29,9 +37,10 @@ class RecordsController extends Controller
      */
     public function create()
     {
+        $date = Input::get('date', date('Y-m-d'));
         $products = Product::all();
 
-        return view('records.create', compact('products'));
+        return view('records.create', compact('products', 'date'));
     }
 
     /**
@@ -98,6 +107,9 @@ class RecordsController extends Controller
         return redirect('/');
     }
 
+    /**
+     * @return mixed
+     */
     public function validateRecord()
     {
         return request()->validate([

@@ -36,7 +36,7 @@
             <label for="date" class="label">Дата</label>
 
             <div class="control">
-                <input type="date" name="date" placeholder="Date" value="{{ old('date') ?? date('Y-m-d') }}">
+                <input type="date" name="date" placeholder="Date" value="{{ old('date') ?? $date }}">
             </div>
         </div>
 
