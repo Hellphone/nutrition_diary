@@ -17,13 +17,12 @@ class PagesController extends Controller
      */
     public function index($date = null)
     {
-//        TODO: add handling invalid date values by a regular expression ('Y-m-d')
         $dates = $this->getDates($date);
 
         $records = Record::where('date', 'like', $dates['today'])->get();
         $todaysKcal = Record::calculateKcalForADay($dates['today']);
 
-        if ($date > date('Y-m-d')) {
+        if ($date >= date('Y-m-d')) {
             return redirect('/');
         }
 
@@ -85,7 +84,6 @@ class PagesController extends Controller
      */
     public function getTomorrow($date)
     {
-//        TODO: if tomorrow is real tomorrow, then redirect to '/'
         if ($date == date('Y-m-d')) {
             $tomorrow = null;
         } else {
