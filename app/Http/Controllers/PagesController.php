@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Record;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * Class PagesController
@@ -34,13 +35,19 @@ class PagesController extends Controller
         ));
     }
 
+//    TODO: create a class for handling dates or look for something that Laravel can offer
+
     /**
      * @param $date
      * @return array
      */
     public function getDates($date)
     {
-        $today = $this->getToday($date);
+        if ($this->validateDate($date)) {
+            $today = $this->getToday($date);
+        } else {
+            $today = date('Y-m-d');
+        }
         $yesterday = $this->getYesterday($today);
         $tomorrow = $this->getTomorrow($today);
 
@@ -92,5 +99,18 @@ class PagesController extends Controller
         }
 
         return $tomorrow;
+    }
+
+    /**
+     * @param $date
+     * @return bool
+     */
+    public function validateDate($date)
+    {
+        if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $date)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
