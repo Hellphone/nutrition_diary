@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Record;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Boolean;
 
@@ -16,8 +17,9 @@ class PagesController extends Controller
      * @param null $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($date = null)
+    public function index()
     {
+        $date = Input::get('date', null);
         $dates = $this->getDates($date);
 
         $records = Record::where('date', 'like', $dates['today'])->get();

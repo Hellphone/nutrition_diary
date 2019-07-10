@@ -90,10 +90,10 @@
                 </div>
 
                 <p>
-                    <a href="/{{ $dates['yesterday'] }}"><- </a>
+                    <a href="/?date={{ $dates['yesterday'] }}"><- </a>
                     Today is {{ $dates['today'] }}
                     @if($dates['tomorrow'])
-                        <a href="/{{ $dates['tomorrow'] }}"> -></a>
+                        <a href="/?date={{ $dates['tomorrow'] }}"> -></a>
                     @endif
                 </p>
 
