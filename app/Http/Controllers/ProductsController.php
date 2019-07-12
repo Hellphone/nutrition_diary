@@ -101,7 +101,7 @@ class ProductsController extends Controller
     public function validateProduct()
     {
         return request()->validate([
-            'name' => ['required', 'max:255'],
+            'name' => ['required', 'unique:products', 'max:255'],
             'proteins' => ['required', 'lte:100'],
             'fats' => ['required', 'lte:100'],
             'carbs' => ['required', 'lte:100'],
