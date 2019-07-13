@@ -15,4 +15,5 @@ Route::resource('products', 'ProductsController');
 Route::resource('records', 'RecordsController');
 
 Route::get('/', 'PagesController@index');
-Route::get('/{date}', 'PagesController@index');
+
+Route::get('/home', 'HomeController@index')->name('home');
