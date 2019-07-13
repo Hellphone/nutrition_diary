@@ -26,8 +26,8 @@ class UpdateNameInProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('log_for_user', function (Blueprint $table) {
-            $table->string('error_message')->change();
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('name')->change();
         });
     }
 }
