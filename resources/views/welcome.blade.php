@@ -84,31 +84,36 @@
                 <div class="title m-b-md">
                     Nutrition Diary
                 </div>
-
-                <div class="links">
-                    <a href="/products">Products</a>
-                </div>
-
-                <p>
-                    <a href="/?date={{ $dates['yesterday'] }}"><- </a>
-                    Today is {{ $dates['today'] }}
-                    @if($dates['tomorrow'])
-                        <a href="/?date={{ $dates['tomorrow'] }}"> -></a>
-                    @endif
-                </p>
-
-                <p>Total today's Kcal: <span class="important">{{ $todaysKcal }}</span></p>
-
-                @if($records->count())
-                <div class="links links-vertical">
-                    @foreach($records as $record)
-                        <a href="/records/{{ $record->id }}/edit">{{ $record->product->name }} : {{ $record->weight }} г || {{ $record->calculateKcal() }} кКал</a>
-                    @endforeach
-                </div>
+                
+                @guest
+                    <p><a href="/login">Login</a> to access your personal section.</p>
+                    <p>New to this place? <a href="/register">Register</a>.</p>
                 @else
-                    <p>No records for today</p>
-                @endif
-                <a href="/records/create/?date={{ $dates['today'] }}">+</a>
+                    <div class="links">
+                        <a href="/products">Products</a>
+                    </div>
+    
+                    <p>
+                        <a href="/?date={{ $dates['yesterday'] }}"><- </a>
+                        Today is {{ $dates['today'] }}
+                        @if($dates['tomorrow'])
+                            <a href="/?date={{ $dates['tomorrow'] }}"> -></a>
+                        @endif
+                    </p>
+    
+                    <p>Total today's Kcal: <span class="important">{{ $todaysKcal }}</span></p>
+    
+                    @if($records->count())
+                    <div class="links links-vertical">
+                        @foreach($records as $record)
+                            <a href="/records/{{ $record->id }}/edit">{{ $record->product->name }} : {{ $record->weight }} г || {{ $record->calculateKcal() }} кКал</a>
+                        @endforeach
+                    </div>
+                    @else
+                        <p>No records for today</p>
+                    @endif
+                    <a href="/records/create/?date={{ $dates['today'] }}">+</a>
+                @endguest
             </div>
         </div>
     </body>

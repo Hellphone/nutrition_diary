@@ -15,10 +15,13 @@ class CreateRecordsTable extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('product_id');
+            $table->unsignedBigInteger('owner_id');
+            $table->unsignedBigInteger('product_id');
             $table->integer('weight');
             $table->date('date');
             $table->timestamps();
+
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -22,7 +22,9 @@ class PagesController extends Controller
         $date = Input::get('date', null);
         $dates = $this->getDates($date);
 
-        $records = Record::where('date', 'like', $dates['today'])->get();
+        $records = Record::where('date', 'like', $dates['today'])
+            ->where('owner_id', 'like', auth()->id())
+            ->get();
         $todaysKcal = Record::calculateKcalForADay($dates['today']);
 
         if ($date >= date('Y-m-d')) {

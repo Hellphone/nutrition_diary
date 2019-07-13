@@ -17,19 +17,9 @@ class RecordsController extends Controller
      * @param null $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($date = null)
+    public function index()
     {
-        $dates = $this->getDates($date);
-
-        $records = Record::where('date', 'like', $dates['today'])->get();
-        $todaysKcal = Record::calculateKcalForADay($dates['today']);
-
-        return view('welcome', compact(
-            'products',
-            'records',
-            'dates',
-            'todaysKcal'
-        ));
+        return redirect('/');
     }
 
     /**
@@ -50,6 +40,8 @@ class RecordsController extends Controller
     {
         $attributes = $this->validateRecord();
 
+        $attributes['owner_id'] = auth()->id();
+
         Record::create($attributes);
 
         return redirect('/');
@@ -61,6 +53,8 @@ class RecordsController extends Controller
      */
     public function show(Record $record)
     {
+        $this->authorize('update', $record);
+
         $links = [
             "/records" => "All records",
             "/records/create" => "Create",

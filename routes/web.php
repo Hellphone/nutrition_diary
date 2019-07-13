@@ -11,8 +11,10 @@
 |
 */
 
-Route::resource('products', 'ProductsController');
-Route::resource('records', 'RecordsController');
+Auth::routes();
+
+Route::resource('products', 'ProductsController')->middleware('auth');
+Route::resource('records', 'RecordsController')->middleware('auth')->middleware('can:update,record');
 
 Route::get('/', 'PagesController@index');
 

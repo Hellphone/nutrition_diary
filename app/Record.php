@@ -10,6 +10,7 @@ class Record extends Model
      * @var array
      */
     protected $fillable = [
+        'owner_id',
         'product_id',
         'weight',
         'date',
@@ -59,5 +60,10 @@ class Record extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(Owner::class);
     }
 }
