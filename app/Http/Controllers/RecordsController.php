@@ -39,7 +39,6 @@ class RecordsController extends Controller
     public function store()
     {
         $attributes = $this->validateRecord();
-
         $attributes['owner_id'] = auth()->id();
 
         Record::create($attributes);
@@ -83,6 +82,7 @@ class RecordsController extends Controller
     public function update(Record $record)
     {
         $attributes = $this->validateRecord();
+        $attributes['owner_id'] = auth()->id();
 
         $record->update($attributes);
 
