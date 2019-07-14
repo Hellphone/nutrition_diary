@@ -19,24 +19,29 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $date = Input::get('date', null);
-        $dates = $this->getDates($date);
+        if (auth()->user()) {
+            $date = Input::get('date', null);
+            $dates = $this->getDates($date);
 
-        $records = Record::where('date', 'like', $dates['today'])
-            ->where('owner_id', 'like', auth()->id())
-            ->get();
-        $todaysKcal = Record::calculateKcalForADay($dates['today']);
+            $records = Record::where('date', 'like', $dates['today'])
+                ->where('owner_id', 'like', auth()->id())
+                ->get();
+            $todaysKcal = Record::calculateKcalForADay($dates['today']);
 
-        if ($date >= date('Y-m-d')) {
-            return redirect('/');
+            if ($date >= date('Y-m-d')) {
+                return redirect('/');
+            }
+
+            return view('welcome', compact(
+                'products',
+                'records',
+                'dates',
+                'todaysKcal'
+            ));
+        } else {
+            return view('welcome');
         }
 
-        return view('welcome', compact(
-            'products',
-            'records',
-            'dates',
-            'todaysKcal'
-        ));
     }
 
 //    TODO: create a class for handling dates or look for something that Laravel can offer
