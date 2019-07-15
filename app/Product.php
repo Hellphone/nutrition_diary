@@ -10,6 +10,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
+        'owner_id',
         'name',
         'proteins',
         'fats',

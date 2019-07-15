@@ -28,7 +28,7 @@ class RecordsController extends Controller
     public function create()
     {
         $date = Input::get('date', date('Y-m-d'));
-        $products = Product::all();
+        $products = Product::where('owner_id', 'like', auth()->id())->get();
 
         return view('records.create', compact('products', 'date'));
     }
@@ -70,6 +70,8 @@ class RecordsController extends Controller
      */
     public function edit(Record $record)
     {
+        $this->authorize('update', $record);
+
         $products = Product::all();
 
         return view('records.edit', compact('record', 'products'));

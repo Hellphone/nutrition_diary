@@ -16,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::where('owner_id', 'like', auth()->id())->get();
         $links = [
           "/" => "Home",
           "/products/create" => "Create",
@@ -39,6 +39,7 @@ class ProductsController extends Controller
     public function store()
     {
         $attributes = $this->validateProduct();
+        $attributes['owner_id'] = auth()->id();
 
         Product::create($attributes);
 
@@ -67,6 +68,8 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('update', $product);
+
         return view('products.edit', compact('product'));
     }
 

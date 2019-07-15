@@ -42,7 +42,7 @@ class Record extends Model
     public static function calculateKcalForADay($date) : int
     {
         try {
-            $records = Record::where('date', 'like', $date)->get();
+            $records = Record::where('date', 'like', $date)->where('owner_id', 'like', auth()->id())->get();
             $sum = 0;
             foreach ($records as $record) {
                 $sum += $record->calculateKcal();
