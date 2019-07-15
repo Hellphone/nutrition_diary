@@ -15,11 +15,14 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
+            $table->unsignedBigInteger('owner_id');
             $table->string('name');
             $table->integer('proteins');
             $table->integer('fats');
             $table->integer('carbs');
             $table->timestamps();
+
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
