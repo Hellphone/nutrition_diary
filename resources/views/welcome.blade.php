@@ -94,11 +94,16 @@
                     </div>
     
                     <p>
-                        <a href="/?date={{ $dates['yesterday'] }}"><- </a>
-                        Today is {{ $dates['today'] }}
-                        @if($dates['tomorrow'])
-                            <a href="/?date={{ $dates['tomorrow'] }}"> -></a>
-                        @endif
+                        <form action="/" method="GET">
+                            <a href="/?date={{ $dates['yesterday'] }}"><- </a>
+
+                                Today is <input type="date" name="date" placeholder="Date" value="{{ $dates['today'] }}">
+                                <input type="submit" value="Go">
+
+                            @if($dates['tomorrow'])
+                                <a href="/?date={{ $dates['tomorrow'] }}"> -></a>
+                            @endif
+                        </form>
                     </p>
     
                     <p>Total today's Kcal: <span class="important">{{ $todaysKcal }}</span></p>
