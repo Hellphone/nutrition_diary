@@ -95,9 +95,9 @@
     
                     <p>
                         <form action="/" method="GET">
-                            <a href="/?date={{ $dates['yesterday'] }}"><- </a>
+                            <a href="/?date={{ $dates['yesterday'] }}"><-</a>
 
-                                Today is <input type="date" name="date" placeholder="Date" value="{{ $dates['today'] }}">
+                                <a href="/?date={{ $dates['today'] }}">Today</a> is <input type="date" name="date" placeholder="Date" value="{{ $dates['today'] }}">
                                 <input type="submit" value="Go">
 
                             @if($dates['tomorrow'])
