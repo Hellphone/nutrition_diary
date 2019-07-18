@@ -59,8 +59,9 @@ class PagesController extends Controller
         }
         $yesterday = $this->getYesterday($today);
         $tomorrow = $this->getTomorrow($today);
+        $realToday = date('Y-m-d');
 
-        $dates = compact('yesterday', 'today', 'tomorrow');
+        $dates = compact('yesterday', 'today', 'tomorrow', 'realToday');
 
         return $dates;
     }
