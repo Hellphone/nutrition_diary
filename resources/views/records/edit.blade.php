@@ -43,7 +43,7 @@
             <label for="date" class="label">Дата</label>
 
             <div class="control">
-                <input type="text" name="date" placeholder="Date" value="{{ $record->date }}">
+                <input type="date" name="date" placeholder="Date" value="{{ $record->date }}">
             </div>
         </div>
 
