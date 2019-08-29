@@ -39,6 +39,7 @@ class Record extends Model
         return $Kcal;
     }
 
+
     public static function calculateKcalForADay($date) : int
     {
         try {
@@ -46,6 +47,36 @@ class Record extends Model
             $sum = 0;
             foreach ($records as $record) {
                 $sum += $record->calculateKcal();
+            }
+        } catch (\Exception $e) {
+            return 0;
+        }
+
+        return $sum;
+    }
+
+    public static function calculateMacrosForADay($date, $type) : int
+    {
+        try {
+            $records = Record::where('date', 'like', $date)->where('owner_id', 'like', auth()->id())->get();
+            $sum = 0;
+            foreach ($records as $record) {
+                $sum += $record->product->$type;
+            }
+        } catch (\Exception $e) {
+            return 0;
+        }
+
+        return $sum;
+    }
+
+    public static function calculateWeightForADay($date) : int
+    {
+        try {
+            $records = Record::where('date', 'like', $date)->where('owner_id', 'like', auth()->id())->get();
+            $sum = 0;
+            foreach ($records as $record) {
+                $sum += $record->weight;
             }
         } catch (\Exception $e) {
             return 0;

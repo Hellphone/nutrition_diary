@@ -26,6 +26,10 @@ class PagesController extends Controller
             $records = Record::where('date', 'like', $dates['today'])
                 ->where('owner_id', 'like', auth()->id())
                 ->get();
+            $todaysProteins = Record::calculateMacrosForADay($dates['today'], 'proteins');
+            $todaysFats = Record::calculateMacrosForADay($dates['today'], 'fats');
+            $todaysCarbs = Record::calculateMacrosForADay($dates['today'], 'carbs');
+            $todaysWeight = Record::calculateWeightForADay($dates['today']);
             $todaysKcal = Record::calculateKcalForADay($dates['today']);
 
             if ($date >= date('Y-m-d')) {
@@ -36,6 +40,10 @@ class PagesController extends Controller
                 'products',
                 'records',
                 'dates',
+                'todaysProteins',
+                'todaysFats',
+                'todaysCarbs',
+                'todaysWeight',
                 'todaysKcal'
             ));
         } else {

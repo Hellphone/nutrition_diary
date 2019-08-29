@@ -84,7 +84,7 @@
                 <div class="title m-b-md">
                     Nutrition Diary
                 </div>
-                
+
                 @guest
                     <p><a href="/login">Login</a> to access your personal section.</p>
                     <p>New to this place? <a href="/register">Register</a>.</p>
@@ -92,7 +92,7 @@
                     <div class="links">
                         <a href="/products">Products</a>
                     </div>
-    
+
                     <p>
                         <form action="/" method="GET">
                             <a href="/?date={{ $dates['yesterday'] }}"><-</a>
@@ -105,18 +105,49 @@
                             @endif
                         </form>
                     </p>
-    
+
                     <p>Total today's Kcal: <span class="important">{{ $todaysKcal }}</span></p>
-    
+
                     @if($records->count())
-                    <div class="links links-vertical">
-                        @foreach($records as $record)
-                            <a href="/records/{{ $record->id }}/edit">{{ $record->product->name }} : {{ $record->weight }} г || {{ $record->calculateKcal() }} кКал</a>
-                        @endforeach
-                    </div>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Protein</th>
+                                <th scope="col">Fat</th>
+                                <th scope="col">Carbohydrates</th>
+                                <th scope="col">Weight</th>
+                                <th scope="col">Calories</th>
+                            </tr>
+                            </thead>
+                            @foreach($records as $record)
+                                <tr>
+                                    <a href="/records/{{ $record->id }}/edit">
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $record->product->name }}</td>
+                                        <td>{{ $record->product->proteins }}</td>
+                                        <td>{{ $record->product->fats }}</td>
+                                        <td>{{ $record->product->carbs }}</td>
+                                        <td>{{ $record->weight }}</td>
+                                        <td>{{ $record->calculateKcal() }}</td>
+                                    </a>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Total:</th>
+                                <th scope="col">{{ $todaysProteins }}</th>
+                                <th scope="col">{{ $todaysFats }}</th>
+                                <th scope="col">{{ $todaysCarbs }}</th>
+                                <th scope="col">{{ $todaysWeight }}</th>
+                                <th scope="col">{{ $todaysKcal }}</th>
+                            </tr>
+                        </table>
                     @else
                         <p>No records for today</p>
                     @endif
+
                     <a href="/records/create/?date={{ $dates['today'] }}">+</a>
                 @endguest
             </div>
