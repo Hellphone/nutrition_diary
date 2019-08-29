@@ -21,3 +21,24 @@ ul>li>a:hover {
     font-weight: bold;
     text-decoration: underline;
 }
+
+a {
+    color: rgb(99, 107, 111);
+    font-weight: bold;
+}
+
+button[type="submit"],
+input[type="submit"] {
+     border-radius: 5px;
+     border: 1px solid #333;
+     background: #fff;
+     padding: 5px;
+     cursor: pointer;
+     margin: 10px;
+ }
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+    background: #333;
+    color: #fff;
+}
