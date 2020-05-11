@@ -86,8 +86,8 @@
                 </div>
 
                 @guest
-                    <p><a href="/login">Login</a> to access your personal section.</p>
-                    <p>New to this place? <a href="/register">Register</a>.</p>
+                    <p><a href="{{ route('login') }}">Login</a> to access your personal section.</p>
+                    <p>New to this place? <a href="{{ route('register') }}">Register</a>.</p>
                 @else
                     <div class="links">
                         <a href="/products">Products</a>
