@@ -125,12 +125,12 @@
                                 <tr>
                                     <a href="/records/{{ $record->id }}/edit">
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $record->product->name }}</td>
-                                        <td>{{ $record->product->proteins }}</td>
-                                        <td>{{ $record->product->fats }}</td>
-                                        <td>{{ $record->product->carbs }}</td>
-                                        <td>{{ $record->weight }}</td>
-                                        <td>{{ $record->calculateKcal() }}</td>
+                                        <td>{{ $record->product->name ?? 'Deleted product' }}</td>
+                                        <td>{{ $record->product->proteins ?? 0 }}</td>
+                                        <td>{{ $record->product->fats ?? 0 }}</td>
+                                        <td>{{ $record->product->carbs ?? 0 }}</td>
+                                        <td>{{ $record->weight ?? '' }}</td>
+                                        <td>{{ $record->calculateKcal() ?? '' }}</td>
                                     </a>
                                 </tr>
                             @endforeach
