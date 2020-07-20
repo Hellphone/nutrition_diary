@@ -38,10 +38,10 @@ class RecordsController extends Controller
      */
     public function store()
     {
-        $attributes = $this->validateRecord();
-        $attributes['owner_id'] = auth()->id();
-
-        Record::create($attributes);
+        $this->validateRecord();
+        $record = new Record(request(['product_id', 'weight', 'date']));
+        $record->owner_id = auth()->id();
+        $record->save();
 
         return redirect('/');
     }
@@ -49,6 +49,7 @@ class RecordsController extends Controller
     /**
      * @param Record $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Record $record)
     {
@@ -67,6 +68,7 @@ class RecordsController extends Controller
     /**
      * @param Record $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Record $record)
     {
@@ -83,10 +85,7 @@ class RecordsController extends Controller
      */
     public function update(Record $record)
     {
-        $attributes = $this->validateRecord();
-        $attributes['owner_id'] = auth()->id();
-
-        $record->update($attributes);
+        $record->update($this->validateRecord());
 
         return redirect('/');
     }
@@ -106,11 +105,11 @@ class RecordsController extends Controller
     /**
      * @return mixed
      */
-    public function validateRecord()
+    protected function validateRecord()
     {
         return request()->validate([
             'product_id' => ['required'],
-            'weight' => ['required', 'min:1'],
+            'weight' => ['required', 'gt:0'],
             'date' => ['required', 'date_format:Y-m-d']
         ]);
     }
