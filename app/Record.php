@@ -39,7 +39,6 @@ class Record extends Model
         return $Kcal;
     }
 
-
     public static function calculateKcalForADay($date) : int
     {
         try {
