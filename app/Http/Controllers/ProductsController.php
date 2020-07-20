@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 /**
@@ -79,9 +80,7 @@ class ProductsController extends Controller
      */
     public function update(Product $product)
     {
-        $attributes = $this->validateProduct();
-
-        $product->update($attributes);
+        $product->update($this->validateProduct($product));
 
         return redirect('/products');
     }
@@ -101,13 +100,17 @@ class ProductsController extends Controller
     /**
      * @return mixed
      */
-    public function validateProduct()
+    public function validateProduct(Product $product)
     {
         return request()->validate([
-            'name' => ['required', 'unique:products', 'max:255'],
-            'proteins' => ['required', 'lte:100'],
-            'fats' => ['required', 'lte:100'],
-            'carbs' => ['required', 'lte:100'],
+            'name' => [
+                'required',
+                Rule::unique('products')->ignore($product),
+                'max:255'
+            ],
+            'proteins' => ['required', 'gte:0', 'lte:100'],
+            'fats' => ['required', 'gte:0', 'lte:100'],
+            'carbs' => ['required', 'gte:0', 'lte:100'],
         ]);
     }
 }
