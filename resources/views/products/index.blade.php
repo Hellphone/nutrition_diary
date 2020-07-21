@@ -23,10 +23,10 @@
                 <form class="form__update" method="POST" action="/products/{{ $product->id }}">
                     @method('PATCH')
                     @csrf
-                    <input type="text" class="input-editable" name="name" value="{{ $product->name }}">
-                    <input type="text" class="input-editable" name="proteins" value="{{ $product->proteins }}">
-                    <input type="text" class="input-editable" name="fats" value="{{ $product->fats }}">
-                    <input type="text" class="input-editable" name="carbs" value="{{ $product->carbs }}">
+                    <input type="text" name="name" value="{{ $product->name }}">
+                    <input type="text" class="input-editable-number" name="proteins" value="{{ $product->proteins }}">
+                    <input type="text" class="input-editable-number" name="fats" value="{{ $product->fats }}">
+                    <input type="text" class="input-editable-number" name="carbs" value="{{ $product->carbs }}">
                     <button type="submit">Update</button>
                 </form>
                 @include('errors')
