@@ -14,14 +14,22 @@ class CreateRecordsTable extends Migration
     public function up()
     {
         Schema::create('records', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unsigned();
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('weight');
             $table->date('date');
             $table->timestamps();
 
-            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('owner_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade');
         });
     }
 
