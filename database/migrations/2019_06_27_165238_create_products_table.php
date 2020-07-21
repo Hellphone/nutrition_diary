@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->unsignedBigInteger('owner_id');
+            $table->boolean('is_private')->default(false);
             $table->string('name')->unique();
             $table->integer('proteins');
             $table->integer('fats');
