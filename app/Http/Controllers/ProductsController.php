@@ -80,7 +80,7 @@ class ProductsController extends Controller
      */
     public function update(Product $product)
     {
-        $product->update($this->validateProduct($product));
+        $product->update($this->validateProduct());
 
         return redirect('/products');
     }
@@ -98,14 +98,15 @@ class ProductsController extends Controller
     }
 
     /**
+     * @param Product $product
      * @return mixed
      */
-    public function validateProduct(Product $product)
+    public function validateProduct()
     {
         return request()->validate([
             'name' => [
                 'required',
-                Rule::unique('products')->ignore($product),
+                Rule::unique('products')->ignore(request('id')),
                 'max:255'
             ],
             'proteins' => ['required', 'gte:0', 'lte:100'],
