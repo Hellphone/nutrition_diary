@@ -42,3 +42,11 @@ input[type="submit"]:hover {
     background: #333;
     color: #fff;
 }
+
+.input-editable-number {
+    width: 2em;
+}
+
+.table-like {
+    text-align: left;
+}
