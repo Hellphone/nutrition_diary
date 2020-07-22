@@ -23,6 +23,7 @@
                 <form class="form__update" method="POST" action="/products/{{ $product->id }}">
                     @method('PATCH')
                     @csrf
+                    <input type="hidden" name="id" value="{{ $product->id }}">
                     <input type="text" name="name" value="{{ $product->name }}">
                     <input type="text" class="input-editable-number" name="proteins" value="{{ $product->proteins }}">
                     <input type="text" class="input-editable-number" name="fats" value="{{ $product->fats }}">
